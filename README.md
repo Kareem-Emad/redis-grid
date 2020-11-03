@@ -43,4 +43,12 @@ Notice you need to mention the key twice, one time in the `command args` array a
 ## can I use another cache server?
 
 yes as long you implemnent the interface `cache.client`, then you can easily swap in your new caching layer instead of redis, no assumptions are made for redis beyond the interface level.
+```go
+// Client a contract interface for any caching third party client to be used with our system
+type Client interface {
+	Init(string) error
+	InitWithDefault() error
+	ExecuteRawCommand(commandName string, args ...interface{}) (string, error)
+}
+```
 
